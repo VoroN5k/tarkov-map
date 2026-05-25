@@ -1,0 +1,7 @@
+[
+  { "id": "customs-loot-1", "type": "loot", "label": "Dorms 204 (ключ)", "lat": 545, "lng": 475, "description": "Файл, рюкзаки, зброя" },
+  { "id": "customs-loot-2", "type": "loot", "label": "Dorms 214 (ключ)", "lat": 558, "lng": 480, "description": "Хімічні речі, файл" },
+  { "id": "customs-loot-3", "type": "loot", "label": "Big Red", "lat": 605, "lng": 245, "description": "Техніка, зброя, ПП" },
+  { "id": "customs-loot-4", "type": "loot", "label": "Customs office (ключ)", "lat": 630, "lng": 320, "description": "Файли, техніка" },
+  { "id": "customs-loot-5", "type": "loot", "label": "ZB-011", "lat": 745, "lng": 695, "description": "Зброя, бронежилети" }
+]

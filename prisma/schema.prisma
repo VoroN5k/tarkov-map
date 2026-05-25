@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Карти
+
+model Map {
+  id         String @id @default(uuid())
+  slug       String @unique // "customs", "woods", "interchange" …
+  name       String
+  minZoom    Int    @default(2) @map("min_zoom")
+  maxZoom    Int    @default(6) @map("max_zoom")
+  // [[lat, lng], [lat, lng]] — bounds для Leaflet
+  boundsJson String @map("bounds_json")
+
+  squadMarkers SquadMarker[]
+
+  @@map("maps")
+}
+
+// Користувачі (розширення Supabase auth.users)
+
+model Profile {
+  // id = auth.users.id — не генеруємо самі, береться з Supabase Auth
+  id        String   @id
+  username  String   @unique
+  avatarUrl String?  @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  ownedSquads  Squad[]       @relation("SquadOwner")
+  squadMembers SquadMember[]
+  squadMarkers SquadMarker[]
+
+  @@map("profiles")
+}
+
+// Загони
+
+model Squad {
+  id         String   @id @default(uuid())
+  name       String
+  inviteCode String   @unique @map("invite_code") // 6-символьний код типу "AX4K9Z"
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  ownerId String  @map("owner_id")
+  owner   Profile @relation("SquadOwner", fields: [ownerId], references: [id])
+
+  members SquadMember[]
+  markers SquadMarker[]
+
+  @@map("squads")
+}
+
+model SquadMember {
+  id       String     @id @default(uuid())
+  role     MemberRole @default(MEMBER)
+  joinedAt DateTime   @default(now()) @map("joined_at")
+
+  squadId String @map("squad_id")
+  squad   Squad  @relation(fields: [squadId], references: [id], onDelete: Cascade)
+
+  userId String  @map("user_id")
+  user   Profile @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([squadId, userId]) // один гравець = один раз у загоні
+  @@map("squad_members")
+}
+
+enum MemberRole {
+  OWNER
+  MEMBER
+}
+
+// Мітки загону (realtime)
+
+model SquadMarker {
+  id        String     @id @default(uuid())
+  type      MarkerType
+  label     String?
+  lat       Float
+  lng       Float
+  createdAt DateTime   @default(now()) @map("created_at")
+  expiresAt DateTime   @map("expires_at") // auto-TTL — 10 хвилин після створення
+
+  squadId String @map("squad_id")
+  squad   Squad  @relation(fields: [squadId], references: [id], onDelete: Cascade)
+
+  mapId String @map("map_id")
+  map   Map    @relation(fields: [mapId], references: [id])
+
+  createdById String  @map("created_by")
+  createdBy   Profile @relation(fields: [createdById], references: [id])
+
+  @@map("squad_markers")
+}
+
+enum MarkerType {
+  ENEMY // ворог / снайпер
+  LOOT // знайдений лут
+  MEETING // точка зустрічі
+  DANGER // небезпечна зона
+  CUSTOM // своя мітка
+}

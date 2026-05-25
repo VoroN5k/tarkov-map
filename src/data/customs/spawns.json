@@ -1,0 +1,8 @@
+[
+  { "id": "customs-spawn-1", "type": "spawn", "label": "Spawn — Trailer Park", "lat": 250, "lng": 600 },
+  { "id": "customs-spawn-2", "type": "spawn", "label": "Spawn — ZB-011", "lat": 720, "lng": 720 },
+  { "id": "customs-spawn-3", "type": "spawn", "label": "Spawn — Old Gas Station", "lat": 390, "lng": 140 },
+  { "id": "customs-spawn-4", "type": "spawn", "label": "Spawn — Construction", "lat": 480, "lng": 340 },
+  { "id": "customs-spawn-5", "type": "spawn", "label": "Spawn — Dorms East", "lat": 560, "lng": 500 },
+  { "id": "customs-spawn-6", "type": "spawn", "label": "Spawn — Big Red", "lat": 610, "lng": 250 }
+]

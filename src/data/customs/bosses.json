@@ -1,0 +1,10 @@
+[
+  {
+    "id": "customs-boss-reshala",
+    "type": "boss",
+    "label": "Решала (Reshala)",
+    "lat": 560,
+    "lng": 450,
+    "description": "Решала зазвичай знаходиться в гуртожитках (Dorms) або на автозаводі. Spawn 35%."
+  }
+]
