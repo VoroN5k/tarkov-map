@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  turbopack: {
+    resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
+  },
+}
 
-export default nextConfig;
+export default nextConfig
