@@ -40,7 +40,7 @@ export function CreateSquadModal({ onClose, onCreate, onJoin }: CreateSquadModal
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
       <div className="bg-zinc-900 border border-zinc-700 rounded-xl w-full max-w-sm shadow-2xl">
         <div className="flex items-center justify-between p-4 border-b border-zinc-800">
           <h2 className="text-base font-semibold text-zinc-100">Загін</h2>
