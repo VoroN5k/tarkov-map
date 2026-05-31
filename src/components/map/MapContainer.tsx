@@ -1,7 +1,7 @@
 'use client'
 
 import 'leaflet/dist/leaflet.css'
-import { MapContainer as LeafletMapContainer, ImageOverlay, ZoomControl } from 'react-leaflet'
+import { MapContainer as LeafletMapContainer, ImageOverlay, ZoomControl, useMapEvents } from 'react-leaflet'
 import L from 'leaflet'
 import { useEffect, useRef, useState } from 'react'
 import type { MapConfig, MarkerType, StaticMarker, SquadMarker } from '@/types'
@@ -28,6 +28,23 @@ interface MapContainerProps {
   placementMode: PlacementMode | null
   onPlace: (lat: number, lng: number) => void
   onDeleteMarker: (id: string) => void
+}
+
+function CoordDisplay() {
+  const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null)
+  useMapEvents({
+    mousemove(e) { setPos({ lat: Math.round(e.latlng.lat), lng: Math.round(e.latlng.lng) }) },
+    mouseout() { setPos(null) },
+  })
+  if (!pos) return null
+  return (
+    <div
+      style={{ position: 'absolute', bottom: 8, left: 8, zIndex: 1000, pointerEvents: 'none' }}
+      className="bg-zinc-900/80 text-zinc-300 text-xs px-2 py-1 rounded font-mono border border-zinc-700"
+    >
+      lat {pos.lat} lng {pos.lng}
+    </div>
+  )
 }
 
 const MARKER_TYPES: { type: MarkerType; label: string; icon: string }[] = [
@@ -81,6 +98,7 @@ export function TarkovMap({
         className={placementMode || drawingRoute ? 'cursor-crosshair' : ''}
       >
         <ZoomControl position="bottomright" />
+        <CoordDisplay />
 
         <ImageOverlay
           url={config.imageUrl}
