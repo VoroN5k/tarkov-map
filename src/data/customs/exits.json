@@ -2,7 +2,9 @@
   { "id": "customs-exit-1", "type": "exit", "label": "RUAF Roadblock", "lat": 820, "lng": 380, "description": "ПМЦ виходить на північ" },
   { "id": "customs-exit-2", "type": "exit", "label": "ZB-1011", "lat": 750, "lng": 680, "description": "Потрібна ключ-картка ZB-1011" },
   { "id": "customs-exit-3", "type": "exit", "label": "ZB-1012", "lat": 600, "lng": 780, "description": "Потрібна ключ-картка ZB-1012" },
-  { "id": "customs-exit-4", "type": "exit", "label": "Trailer Park", "lat": 270, "lng": 650, "description": "Вихід через трейлерний парк" },
+  { "id": "customs-exit-4", "type": "exit", "label": "Trailer Park", "lat": 730, "lng": 850, "description": "Вихід через трейлерний парк" },
   { "id": "customs-exit-5", "type": "exit", "label": "Old Gas Station", "lat": 400, "lng": 120, "description": "Стара заправка" },
-  { "id": "customs-exit-6", "type": "exit", "label": "Dorms V-Ex", "lat": 560, "lng": 440, "description": "Требова витяжка $3000" }
+  { "id": "customs-exit-6", "type": "exit", "label": "Dorms V-Ex", "lat": 560, "lng": 440, "description": "Требова витяжка $3000" },
+  { "id": "customs-exit-7", "type": "exit", "label": "Crossroads", "lat": 627, "lng": 867, "description": "All" }
 ]
+
