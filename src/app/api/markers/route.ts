@@ -29,13 +29,6 @@ export async function POST(request: Request) {
   })
   if (!membership) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
-  // Ensure map record exists
-  await prisma.map.upsert({
-    where: { slug: mapId },
-    create: { slug: mapId, name: mapId, boundsJson: '[[0,0],[1000,1000]]' },
-    update: {},
-  })
-
   const expiresAt = new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
 
   const marker = await prisma.squadMarker.create({

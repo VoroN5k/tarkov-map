@@ -82,9 +82,14 @@ export function useSquadMarkers(squadId: string | null, mapId: string) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...params, squadId, mapId }),
       })
-      return res.ok ? res.json() : null
+      if (res.ok) {
+        // Refetch immediately so marker appears without waiting for Realtime
+        await fetchMarkers()
+        return res.json().catch(() => null)
+      }
+      return null
     },
-    [squadId, mapId]
+    [squadId, mapId, fetchMarkers]
   )
 
   const removeMarker = useCallback(async (markerId: string) => {
