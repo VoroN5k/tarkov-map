@@ -51,7 +51,10 @@ export function useSquadMarkers(squadId: string | null, mapId: string) {
             .select('*, created_by:profiles(username)')
             .eq('id', newMarker.id)
             .single()
-          if (data) setMarkers((prev) => [data as unknown as SquadMarker, ...prev])
+          if (data) setMarkers((prev) => {
+            if (prev.some((m) => m.id === (data as unknown as SquadMarker).id)) return prev
+            return [data as unknown as SquadMarker, ...prev]
+          })
         }
       )
       .on(
